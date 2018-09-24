@@ -1,28 +1,64 @@
 import 'package:flutter/material.dart';
 import 'product_listing_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _LoginPageState();
+  }
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String _emailValue;
+  String _passwordValue;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Login'),
         ),
-        body: Center(
-          child: Column(
+        body: Container(
+          padding: EdgeInsets.all(20.0),
+          child: ListView(
             children: <Widget>[
               Container(
-                  width: 190.0,
-                  height: 190.0,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage('assets/human.png')))),
+                  padding: EdgeInsets.all(35.0),
+                  child: Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(fontSize: 30.0),
+                    ),
+                  )),
+              TextField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(labelText: 'Email'),
+                onChanged: (String v) {
+                  setState(() {
+                    _emailValue = v;
+                  });
+                },
+              ),
+              TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+                onChanged: (String v) {
+                  setState(() {
+                    _passwordValue = v;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
               RaisedButton(
+                  color: Theme.of(context).primaryColor,
+                  textColor: Colors.white,
                   child: Text("Login"),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, "listing");
+                    Navigator.pushReplacementNamed(context, "products");
                   }),
             ],
           ),

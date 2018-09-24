@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 //import 'package:flutter/rendering.dart';
-//import 'pages/login_page.dart';
+import 'pages/login_page.dart';
 import 'pages/product_listing_page.dart';
 import 'pages/product.dart';
 import 'pages/manage_product_page.dart';
+import 'package:flutter_course/models/product_model.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
@@ -20,9 +21,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Map<String, String>> _products = [];
+  List<ProductModel> _products = [];
 
-  void _addProduct(Map<String, String> product) {
+  void _addProduct(ProductModel product) {
     setState(() {
       _products.add(product);
     });
@@ -51,13 +52,13 @@ class _MyAppState extends State<MyApp> {
           800: Color(0xff088a55),
           900: Color(0xff047942)
         }),
-        accentColor: Colors.indigo,
+        accentColor: Color(0xff0ea572),
       ),
       // home: LoginPage(),
       routes: {
-        // "/":(BuildContext context) => LoginPage(),
-        "/": (BuildContext context) => ProductListingPage(_products, _addProduct, _deleteProduct),
-        "admin": (BuildContext context) => ManageProductsPage(),
+        "/":(BuildContext context) => LoginPage(),
+        "products": (BuildContext context) => ProductListingPage(_products),
+        "admin": (BuildContext context) => ManageProductsPage(_addProduct, _deleteProduct ),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElement = settings.name.split('/');
@@ -68,7 +69,7 @@ class _MyAppState extends State<MyApp> {
           final int index = int.parse(pathElement[2]);
           return MaterialPageRoute<bool>(
               builder: (BuildContext context) =>
-                  ProductPage('product', _products[index]['image'], index));
+                  ProductPage(_products[index]));
         }
       },
       onUnknownRoute: (RouteSettings settings) {

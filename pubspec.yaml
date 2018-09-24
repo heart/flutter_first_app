@@ -31,13 +31,9 @@ flutter:
     - assets/human.png
 
   fonts:
-    - family: CS ChatThaiUI
+    - family: Sukhumvit Set
       fonts:
-        - asset: fonts/CSChatThaiUI.ttf
-          style: normal
-    - family: tlboldwebfont
-      fonts:
-        - asset: fonts/tlboldwebfont.ttf
+        - asset: fonts/SukhumvitSet.ttc
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
